@@ -1,57 +1,61 @@
-export default {
-  expo: {
-    name: "pasio-ai",
-    slug: "pasio-ai",
-    version: "1.0.0",
-    orientation: "portrait",
-    icon: "./assets/images/icon.png",
-    scheme: "pasioai",
-    userInterfaceStyle: "automatic",
-    newArchEnabled: true,
+export default ({ config }) => ({
+  ...config,
+  name: "Pasio AI",
+  slug: "pasio-ai",
+  version: "1.0.0",
+  orientation: "portrait",
+  icon: "./assets/images/play_store_512.png",
+  scheme: "pasioai",
+  userInterfaceStyle: "automatic",
+  newArchEnabled: true,
 
-    extra: {
-      geminiApiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY,
+  extra: {
+    eas: {
+      projectId: "28749568-2f39-4755-bf31-e37ac2d46cc6",
     },
-
-    ios: {
-      supportsTablet: true,
-    },
-
-    android: {
-      adaptiveIcon: {
-        backgroundColor: "#E6F4FE",
-        foregroundImage: "./assets/images/android-icon-foreground.png",
-        backgroundImage: "./assets/images/android-icon-background.png",
-        monochromeImage: "./assets/images/android-icon-monochrome.png",
-      },
-      edgeToEdgeEnabled: true,
-      predictiveBackGestureEnabled: false,
-    },
-
-    web: {
-      output: "static",
-      favicon: "./assets/images/favicon.png",
-    },
-
-    plugins: [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          image: "./assets/images/splash-icon.png",
-          imageWidth: 200,
-          resizeMode: "contain",
-          backgroundColor: "#ffffff",
-          dark: {
-            backgroundColor: "#000000",
-          },
-        },
-      ],
-    ],
-
-    experiments: {
-      typedRoutes: true,
-      reactCompiler: true,
-    },
+    geminiApiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY, // ← NOW THIS WORKS
   },
-};
+
+  ios: {
+    supportsTablet: true,
+  },
+
+  android: {
+    package: "com.stikom.pasioai",
+    versionCode: 1,
+    adaptiveIcon: {
+      backgroundColor: "#E6F4FE",
+      foregroundImage: "./assets/images/ic_launche_foreground.png",
+      backgroundImage: "./assets/images/ic_launche_background.png",
+      monochromeImage: "./assets/images/ic_launche_monochrome.png",
+    },
+    edgeToEdgeEnabled: true,
+    predictiveBackGestureEnabled: false,
+  },
+
+  web: {
+    output: "static",
+    favicon: "./assets/images/icon-512.png",
+  },
+
+  plugins: [
+    "expo-router",
+    [
+      "expo-splash-screen",
+      {
+        image: "./assets/images/ic_launcher.png",
+        imageWidth: 200,
+        resizeMode: "contain",
+        backgroundColor: "#ffffff",
+        dark: {
+          backgroundColor: "#000000",
+        },
+      },
+    ],
+  ],
+
+  experiments: {
+    typedRoutes: true,
+    reactCompiler: true,
+  },
+});

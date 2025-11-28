@@ -7,7 +7,7 @@ export class GeminiService {
 
   constructor(apiKey: string) {
     this.genAI = new GoogleGenerativeAI(apiKey);
-    this.model = this.genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    this.model = this.genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   }
 
   async generateQuestions(userProfile: UserProfile): Promise<Question[]> {
@@ -68,7 +68,7 @@ OUTPUT HARUS JSON ARRAY SAJA, TANPA PENJELASAN TAMBAHAN.`;
 
     try {
       const result = await this.model.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
 
       // Extract JSON from response
@@ -127,7 +127,7 @@ OUTPUT HARUS JSON OBJECT SAJA, TANPA PENJELASAN TAMBAHAN.`;
 
     try {
       const result = await this.model.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
 
       // Extract JSON from response
