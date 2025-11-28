@@ -25,9 +25,9 @@ export default ({ config }) => ({
     versionCode: 1,
     adaptiveIcon: {
       backgroundColor: "#E6F4FE",
-      foregroundImage: "./assets/images/ic_launche_foreground.png",
-      backgroundImage: "./assets/images/ic_launche_background.png",
-      monochromeImage: "./assets/images/ic_launche_monochrome.png",
+      foregroundImage: "./assets/images/ic_launcher_foreground.png",
+      backgroundImage: "./assets/images/ic_launcher_background.png",
+      monochromeImage: "./assets/images/ic_launcher_monochrome.png",
     },
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
