@@ -43,7 +43,7 @@ export default ({ config }) => ({
     [
       "expo-splash-screen",
       {
-        image: "./assets/images/ic_launcher.png",
+        image: "./assets/images/play_store_512.png",
         imageWidth: 200,
         resizeMode: "contain",
         backgroundColor: "#ffffff",
