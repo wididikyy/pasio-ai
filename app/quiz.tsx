@@ -16,7 +16,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function QuizScreen() {
-  const { userProfile, questions, geminiService, setTestResult, addToHistory } = useApp();
+  const { userProfile, questions, groqService, setTestResult, addToHistory } = useApp();
   const { colors, currentFontSize } = useTheme();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
@@ -32,13 +32,15 @@ export default function QuizScreen() {
     setLoading(true);
     setError("");
     try {
-      if (!geminiService) throw new Error("Service not initialized");
-      const result = await geminiService.analyzeAnswers(userProfile, finalAnswers);
+      if (!groqService) throw new Error("Service not initialized");
+      const result = await groqService.analyzeAnswers(userProfile, finalAnswers);
       setTestResult(result);
       addToHistory(result);
       router.push("/result");
-    } catch {
-      setError("Gagal menganalisis jawaban. Coba lagi.");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error("finishQuiz error:", msg);
+      setError(`Gagal menganalisis jawaban: ${msg}`);
     } finally {
       setLoading(false);
     }

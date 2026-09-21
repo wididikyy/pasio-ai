@@ -1,7 +1,7 @@
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useApp } from "@/context/app-context";
 import { useTheme } from "@/hooks/use-theme";
-import { GeminiService } from "@/services/gemini-service";
+import { GroqService } from "@/services/groq-service";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
@@ -23,7 +23,7 @@ const DISABILITIES = [
 ];
 
 export default function OnboardingScreen() {
-  const { userProfile, setUserProfile, setQuestions, setGeminiService, apiKey } = useApp();
+  const { userProfile, setUserProfile, setQuestions, setGroqService, apiKey } = useApp();
   const { colors, currentFontSize } = useTheme();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -43,13 +43,15 @@ export default function OnboardingScreen() {
     setLoading(true);
     setError("");
     try {
-      const service = new GeminiService(apiKey);
-      setGeminiService(service);
+      const service = new GroqService(apiKey);
+      setGroqService(service);
       const generatedQuestions = await service.generateQuestions(userProfile);
       setQuestions(generatedQuestions);
       router.push("/quiz");
-    } catch {
-      setError("Gagal generate pertanyaan. Periksa API Key Anda.");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error("startQuiz error:", msg);
+      setError(`Gagal generate pertanyaan: ${msg}`);
     } finally {
       setLoading(false);
     }

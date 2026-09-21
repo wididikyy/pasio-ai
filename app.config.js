@@ -13,7 +13,7 @@ export default ({ config }) => ({
     eas: {
       projectId: "28749568-2f39-4755-bf31-e37ac2d46cc6",
     },
-    geminiApiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY, // ← NOW THIS WORKS
+    groqApiKey: process.env.EXPO_PUBLIC_GROQ_API_KEY,
   },
 
   ios: {

@@ -1,4 +1,4 @@
-import { GeminiService } from "@/services/gemini-service";
+import { GroqService } from "@/services/groq-service";
 import { Answer, Question, TestResult, UserProfile } from "@/types";
 import Constants from "expo-constants";
 import { createContext, ReactNode, useContext, useState } from "react";
@@ -14,8 +14,8 @@ interface AppContextType {
   setTestResult: (result: TestResult | null) => void;
   testHistory: TestResult[];
   addToHistory: (result: TestResult) => void;
-  geminiService: GeminiService | null;
-  setGeminiService: (service: GeminiService | null) => void;
+  groqService: GroqService | null;
+  setGroqService: (service: GroqService | null) => void;
   apiKey: string;
   resetQuiz: () => void;
 }
@@ -23,7 +23,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const apiKey = Constants.expoConfig?.extra?.geminiApiKey || "";
+  const apiKey = Constants.expoConfig?.extra?.groqApiKey || "";
 
   const [userProfile, setUserProfile] = useState<UserProfile>({
     name: "",
@@ -35,7 +35,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [testResult, setTestResult] = useState<TestResult | null>(null);
   const [testHistory, setTestHistory] = useState<TestResult[]>([]);
-  const [geminiService, setGeminiService] = useState<GeminiService | null>(null);
+  const [groqService, setGroqService] = useState<GroqService | null>(null);
 
   const addToHistory = (result: TestResult) => setTestHistory((prev) => [...prev, result]);
 
@@ -53,7 +53,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         answers, setAnswers,
         testResult, setTestResult,
         testHistory, addToHistory,
-        geminiService, setGeminiService,
+        groqService, setGroqService,
         apiKey,
         resetQuiz,
       }}
